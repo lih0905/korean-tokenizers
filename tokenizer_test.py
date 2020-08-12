@@ -40,12 +40,13 @@ print(hannanum.morphs(text))
 print("-"*5, "Kkma", "-"*5)
 print(kkma.morphs(text))
 
-print("-"*5, "bert-base-multilingual-cased", "-"*5)
-print(tokenizer.tokenize(text))
-
 print("-"*5, "Khaiii", "-"*5)
 tokens = []
 for word in khaiii.analyze(text):
     tokens.extend([str(m).split('/')[0] for m in word.morphs])
 print(tokens)
+
+print("-"*5, "bert-base-multilingual-cased", "-"*5)
+print(tokenizer.tokenize(text))
+
 

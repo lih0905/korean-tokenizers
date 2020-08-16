@@ -2,16 +2,9 @@ from konlpy.tag import Mecab, Okt, Komoran, Hannanum, Kkma
 from soynlp.word import WordExtractor
 from khaiii import KhaiiiApi
 from transformers import AutoTokenizer
+import argparse
 
-tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased")
-khaiii = KhaiiiApi()
-mecab = Mecab()
-okt = Okt()
-komoran = Komoran()
-hannanum = Hannanum()
-kkma = Kkma()
-
-text = """손승연은 시대를 잘못타고났다해도
+default_text = """손승연은 시대를 잘못타고났다해도
 
 제시는 요즘 힙합트랩 비트와 알앤비가 마구 섞이는 트렌드에 딱 맞는 재목인데
 예능에서만 소비되는게 아까움
@@ -21,6 +14,20 @@ text = """손승연은 시대를 잘못타고났다해도
 
 실제로 본인말로는 외국 유명 프로듀서들이 러브콜해서 진출직전이었는데 코로나사태
 이후 중지되었다고.."""
+
+parser = argparse.ArgumentParser(description='토크나이저를 테스트할 문장을 입력하세요.')
+parser.add_argument('--text', required=False, default=default_text)
+args = parser.parse_args()
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased")
+khaiii = KhaiiiApi()
+mecab = Mecab()
+okt = Okt()
+komoran = Komoran()
+hannanum = Hannanum()
+kkma = Kkma()
+
+text = args.text
 
 print("-"*5,"원본 텍스트", "-"*5)
 print(text)

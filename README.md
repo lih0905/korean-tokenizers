@@ -2,18 +2,42 @@
 
 [네이버 영화리뷰 데이터](https://github.com/e9t/nsmc)의 분류 모델이 한국어 토크나이저에 따라 어떻게 성능이 달라지는지 살펴본다.
 
-* 사용 모델 : 2-layer 2-directional LSTM
+* 모델 : 2-layer 2-directional LSTM
 
-* 토크나이저 리스트
+* 토크나이저 
+    * 공백 기준
+    * 음절 기준
 	* Khaiii
-	* Hannanum 
-    * Kkma 
+	* Hannanum -> 오류 발생
+    * Kkma
     * Komoran 
     * Mecab 
     * Okt 
 
+* Requirements
+
+```
+Python==3.7.3
+khaiii==0.4
+konlpy==0.5.2
+numpy==1.18.5
+pandas==1.0.4
+torch==1.5.0
+torchtext==0.6.0
+tqdm==4.46.1
+transformers==3.0.2
+```    
+
+* Usage
+
+네이버 영화 리뷰 데이터를 다운 받아 data 폴더 안에 저장한 후 다음 코드를 차례대로 실행한다.
+
+```shell
+python data_preprocess.py
+python main.py --n_epochs --max_vocab_size --batch_size --embedding_dim --hidden_dim --n_layers --bidirectional --dropout
+```
+
+모든 토크나이저에 대해 훈련이 끝나고 나면 훈련 결과가 `result.json` 파일로 저장된다.
+
 * To Do
-    * 띄어쓰기, 음절, 자모 단위 추가
-    * BPE 추가
-    
-    
+    * 자모 단위, BPE 추가

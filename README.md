@@ -34,7 +34,10 @@ transformers==3.0.2
 
 ```shell
 python data_preprocess.py
-python main.py --n_epochs --max_vocab_size --batch_size --embedding_dim --hidden_dim --n_layers --bidirectional --dropout
+python main.py [--n_epochs N_EPOCHS] [--max_vocab_size MAX_VOCAB_SIZE]
+               [--batch_size BATCH_SIZE] [--embedding_dim EMBEDDING_DIM]
+               [--hidden_dim HIDDEN_DIM] [--n_layers N_LAYERS]
+               [--bidirectional BIDIRECTIONAL] [--dropout DROPOUT]
 ```
 
 모든 토크나이저에 대해 훈련이 끝나고 나면 훈련 결과가 `result.json` 파일로 저장된다.

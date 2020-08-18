@@ -1,17 +1,6 @@
 
-import time
-
 import torch
 from tqdm import tqdm
-import telegram
-
-# telegram alarm 
-bot = telegram.Bot(token='970060618:AAFbYa2iflYVkwzmoDddsapDXTgJZ0xCKCE')
-def send_telegram_message(txt:str):
-    try:
-        bot.sendMessage(chat_id=874758964, text=txt)
-    except:
-        pass
 
 # calculate the elapsed time
 def epoch_time(start_time, end_time):

@@ -3,7 +3,7 @@ columns = ['id','text','label']
 train_data = pd.read_csv('data/ratings_train.txt', sep='\t', names=columns, skiprows=1).dropna() # null데이터 삭제
 test_data = pd.read_csv('data/ratings_test.txt', sep='\t', names=columns, skiprows=1).dropna()
 
-# Hannanum 및 Kkma 토크나이저 에러나는 라인 삭제
+# Kkma 토크나이저 에러나는 라인 삭제
 err_ind1 = train_data[train_data['text']=='ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ'].index[0]
 err_ind2 = train_data[train_data['text']=='ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ'].index[0]
 err_ind3 = test_data[test_data['text']=='진짜 조낸 재밌다 굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿굿'].index[0]

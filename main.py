@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.optim as optim
 from konlpy.tag import Mecab, Okt, Komoran, Hannanum, Kkma
 from khaiii import KhaiiiApi
+from transformers import AutoTokenizer
 
 from data_loader import dataloader
 from model import RNN
@@ -30,15 +31,23 @@ komoran = Komoran().morphs
 hannanum = Hannanum().morphs # 오류 발생 
 kkma = Kkma().morphs
 
+bert_tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased").tokenize
+kobert_tokenizer = AutoTokenizer.from_pretrained("monologg/kobert").tokenize
+koelectra_tokenizer = AutoTokenizer.from_pretrained("monologg/koelectra-base-v2-discriminator").tokenize
+
 def space_tokenizer(text):
     return text.split(' ')
 
 def char_tokenizer(text):
     return [t for t in text]
 
-tokenizers = [space_tokenizer, char_tokenizer, khaiii_tokenize, mecab, okt, komoran, kkma]
-tokenizer_names = ['space', 'character', 'khaiii', 'mecab', 'okt', 'komoran', 'kkma']
+tokenizers = [space_tokenizer, char_tokenizer, khaiii_tokenize, mecab, okt, komoran, 
+              bert_tokenizer, kobert_tokenizer, koelectra_tokenizer]
+# tokenizers = [bert_tokenizer, kobert_tokenizer, koelectra_tokenizer]
 
+tokenizer_names = ['space', 'character', 'khaiii', 'mecab', 'okt', 'komoran',
+                  'bert', 'kobert', 'koelectra']
+# tokenizer_names = ['bert', 'kobert', 'koelectra']
 
 if __name__ == '__main__':
     

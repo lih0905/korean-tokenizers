@@ -5,10 +5,9 @@ import argparse
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from konlpy.tag import Mecab, Okt, Komoran, Hannanum, Kkma
-from khaiii import KhaiiiApi
 from transformers import AutoTokenizer
 
+from tokenizer_methods import space_tokenizer, char_tokenizer, jamo_split, khaiii_tokenize, mecab, okt, komoran
 from data_loader import dataloader
 from model import RNN
 from utils import train, evaluate, binary_accuracy, epoch_time
@@ -17,37 +16,13 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 parser = argparse.ArgumentParser(description="하이퍼 파라미터 설정")
 
-# tokenizers : 'space', 'character', 'khaiii', 'mecab', 'okt', 'komoran', 'kkma'
-khaiii = KhaiiiApi()
-def khaiii_tokenize(text):
-    tokens = []
-    for word in khaiii.analyze(text):
-        tokens.extend([str(m).split('/')[0] for m in word.morphs])
-    return tokens
-
-mecab = Mecab().morphs
-okt = Okt().morphs
-komoran = Komoran().morphs
-hannanum = Hannanum().morphs # 오류 발생 
-kkma = Kkma().morphs
-
+# huggingface tokenizers
 bert_tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased").tokenize
-kobert_tokenizer = AutoTokenizer.from_pretrained("monologg/kobert").tokenize
 koelectra_tokenizer = AutoTokenizer.from_pretrained("monologg/koelectra-base-v2-discriminator").tokenize
 
-def space_tokenizer(text):
-    return text.split(' ')
-
-def char_tokenizer(text):
-    return [t for t in text]
-
-tokenizers = [space_tokenizer, char_tokenizer, khaiii_tokenize, mecab, okt, komoran, 
-              bert_tokenizer, kobert_tokenizer, koelectra_tokenizer]
-# tokenizers = [bert_tokenizer, kobert_tokenizer, koelectra_tokenizer]
-
-tokenizer_names = ['space', 'character', 'khaiii', 'mecab', 'okt', 'komoran',
-                  'bert', 'kobert', 'koelectra']
-# tokenizer_names = ['bert', 'kobert', 'koelectra']
+# 토크나이저 리스트
+tokenizers = [space_tokenizer, char_tokenizer, jamo_split, khaiii_tokenize, mecab, okt, komoran, bert_tokenizer, koelectra_tokenizer]
+tokenizer_names = ['space', 'character', 'syllable', 'khaiii', 'mecab', 'okt', 'komoran', 'bert', 'koelectra']
 
 if __name__ == '__main__':
     

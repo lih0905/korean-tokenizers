@@ -8,7 +8,7 @@
 ## 토크나이저 
 * 여백 단위(space)
 * 음절 단위(character)
-* 자모 단위(syllable)
+* [자모 단위(syllable)](https://smothly.github.io/data%20science/nlp/2019/11/23/%ED%95%9C%EA%B8%80%EC%9E%90%EB%AA%A8%EB%B6%84%EB%A6%AC.html)
 * [khaiii](https://github.com/kakao/khaiii)
 * [mecab](https://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/)
 * [okt](https://konlpy-ko.readthedocs.io/ko/v0.4.3/api/konlpy.tag/)
@@ -30,6 +30,7 @@
       <th></th>
       <th>space</th>
       <th>character</th>
+      <th>syllable</th>
       <th>khaiii</th>
       <th>mecab</th>
       <th>okt</th>
@@ -41,25 +42,27 @@
   <tbody>
     <tr>
       <th>loss</th>
-      <td>0.428</td>
+      <td>0.432</td>
+      <td>0.307</td>
+      <td>0.315</td>
+      <td>0.319</td>
+      <td>0.303</td>
+      <td>0.320</td>
       <td>0.312</td>
-      <td>0.316</td>
-      <td>0.304</td>
-      <td>0.323</td>
-      <td>0.313</td>
-      <td>0.352</td>
+      <td>0.351</td>
       <td>0.320</td>
     </tr>
     <tr>
       <th>acc</th>
       <td>0.793</td>
-      <td>0.872</td>
-      <td>0.870</td>
-      <td>0.877</td>
+      <td>0.873</td>
       <td>0.867</td>
       <td>0.871</td>
-      <td>0.852</td>
-      <td>0.866</td>
+      <td>0.877</td>
+      <td>0.867</td>
+      <td>0.872</td>
+      <td>0.851</td>
+      <td>0.867</td>
     </tr>
   </tbody>
 </table>
@@ -72,44 +75,44 @@
       <th></th>
       <th>space</th>
       <th>character</th>
+      <th>syllable</th>
       <th>khaiii</th>
       <th>mecab</th>
       <th>okt</th>
       <th>komoran</th>
       <th>bert</th>
-      <th>kobert</th>
       <th>koelectra</th>
     </tr>
   </thead>
   <tbody>
       <tr>
       <th>데이터 로딩 시간</th>
-      <td>1.7</td>
+      <td>1.8</td>
       <td>2.2</td>
-      <td>123.5</td>
-      <td>9.2</td>
-      <td>265.3</td>
-      <td>98.4</td>
-      <td>18.7</td>
-      <td>18.4</td>
-      <td>18.2</td>
+      <td>6.1</td>
+      <td>125.4</td>
+      <td>10.8</td>
+      <td>275.3</td>
+      <td>98.1</td>
+      <td>19.9</td>
+      <td>18.8</td>
     </tr>
     <tr>
       <th>평균 훈련 시간</th>
       <td>17.4</td>
-      <td>52.2</td>
-      <td>33.7</td>
-      <td>31.6</td>
+      <td>52.1</td>
+      <td>119.4</td>
+      <td>33.6</td>
+      <td>31.5</td>
       <td>26.2</td>
-      <td>32.6</td>
+      <td>32.5</td>
       <td>37.6</td>
-      <td>18.8</td>
       <td>33.8</td>
     </tr>
   </tbody>
 </table>
 
-* Mecab 토크나이저가 전반적으로 가장 성능이 뛰어난 편이며, 의외로 문자 단위 토크나이저도 괜찮은 편이다.
+* Mecab 토크나이저가 전반적으로 가장 성능이 뛰어난 편이며, 의외로 문자 단위 토크나이저도 괜찮은 편이다. 다만 훈련 시간이 꽤 긴 편이어서 추가적인 원인 파악이 필요할 것으로 보인다.
 
 ## Requirements
 
@@ -123,7 +126,6 @@ torch==1.5.0
 torchtext==0.6.0
 tqdm==4.46.1
 transformers==3.0.2
-hangul-utils==0.4.5
 ```    
 
 ## Usage

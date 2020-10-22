@@ -11,6 +11,7 @@ from tokenizer_methods import space_tokenizer, char_tokenizer, jamo_split, khaii
 from data_loader import dataloader
 from model import RNN
 from utils import train, evaluate, binary_accuracy, epoch_time
+from tokenization_kobert import KoBertTokenizer
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -18,11 +19,15 @@ parser = argparse.ArgumentParser(description="하이퍼 파라미터 설정")
 
 # huggingface tokenizers
 bert_tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased").tokenize
+kobert_tokenizer = KoBertTokenizer.from_pretrained("monologg/kobert").tokenize
 koelectra_tokenizer = AutoTokenizer.from_pretrained("monologg/koelectra-base-v2-discriminator").tokenize
 
 # 토크나이저 리스트
-tokenizers = [space_tokenizer, char_tokenizer, jamo_split, khaiii_tokenize, mecab, okt, komoran, bert_tokenizer, koelectra_tokenizer]
-tokenizer_names = ['space', 'character', 'syllable', 'khaiii', 'mecab', 'okt', 'komoran', 'bert', 'koelectra']
+tokenizers = [space_tokenizer, char_tokenizer, jamo_split, khaiii_tokenize, mecab, okt, komoran, bert_tokenizer, kobert_tokenizer,
+koelectra_tokenizer]
+tokenizer_names = ['space', 'character', 'syllable', 'khaiii', 'mecab', 'okt', 'komoran', 'bert', 'kobert', 'koelectra']
+# tokenizers = [kobert_tokenizer]
+# tokenizer_names = ['kobert']
 
 if __name__ == '__main__':
     
